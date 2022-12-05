@@ -9,7 +9,7 @@ nav{
     flex-direction: row;
     height:7%;
     width: 100%;
-    background-color: rgb(104, 100, 100);
+    background-color: rgb(92, 15, 73);
     justify-content: space-around;
     align-items: center;
 }
@@ -30,11 +30,42 @@ li{
 a{
     text-decoration: none;
     color:white;
-    font-size: 2em;
+    font-size: 1.2em;
 
 }
 
 a:hover{
     color:goldenrod;
-    font-size:2.1em;
+}
+
+#sessionlog{
+    background-color: rgb(25, 23, 44);
+    color:white;
+    font-weight: bold;
+}
+
+/* -------- formulaire de connexion, inscription, changement d'info, livre d'or---------*/
+
+#connexion_form{
+    padding-top:5%;
+    display:flex;
+    flex-direction:column;
+}
+form{
+    background-color: azure;
+    display: flex;
+    flex-direction:column;
+    width: 50%;
+    background-color: aquamarine;
+    padding:2%;
+}
+
+form input{
+    width:50%;
+    margin:5px 0px 5px 0px;
+
+}
+
+.comment{
+    height:100px;
 }
