@@ -17,7 +17,7 @@ session_start();
                 <?php if (isset($_SESSION['login'])){?>
                 <li><a href=livre-or.php>Le livre d'or</a></li>
                 <li><a href=commentaires.php><span class="material-symbols-outlined">add_comment</span></a></li>
-                <li><a href=profil.php><span class="material-symbols-outlined">manage_accounts</span></a></li>
+                <li><a href=profil.php><span class="material-symbols-outlined">settings</span></a></li>
                 <?php } ?>
                 <li><a href=inscription.php><span class="material-symbols-outlined">how_to_reg</span></a></li>
                 <li><a href=connection.php><span class="material-symbols-outlined">login</span></a></li>
@@ -31,5 +31,35 @@ session_start();
                         }
             ?>
         </div>
+
+        <div id="displayBook">
+            <?php
+                $mysqli = new mysqli('localhost','root','','livreor');
+                if(!$mysqli){
+                die('Erreur : ' .mysqli_connect_error());
+                    }
+                $request=$mysqli->query("SELECT commentaire FROM commentaires");
+                $result_fetch_all = $request->fetch_all();
+                //var_dump($result_fetch_all);
+
+                foreach($result_fetch_all as $ligne){
+                    foreach($ligne as $valeur){
+                        echo '<div id="comment">';
+                        echo $valeur."<br>";
+                        echo '</div>';
+                        }
+                }
+            ?>
+        </div>
     </main>
+    <footer>
+                <ul>
+                    <li><a href="https://github.com/morgane-marechal/livre-or" target="_blank" ><img class="logo" src="github-noir.png" alt="github"></a></li>
+                    <li><a href="connexion.php">Se connecter</a></li>
+                    <li><a href="inscription.php">S'inscrire</a></li>
+                </ul>
+    </footer>
+    </body>
+
+
 

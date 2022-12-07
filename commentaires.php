@@ -17,7 +17,7 @@ session_start();
                 <?php if (isset($_SESSION['login'])){?>
                 <li><a href=livre-or.php>Le livre d'or</a></li>
                 <li><a href=commentaires.php><span class="material-symbols-outlined">add_comment</span></a></li>
-                <li><a href=profil.php><span class="material-symbols-outlined">manage_accounts</span></a></li>
+                <li><a href=profil.php><span class="material-symbols-outlined">settings</span></a></li>
                 <?php } ?>
                 <li><a href=inscription.php><span class="material-symbols-outlined">how_to_reg</span></a></li>
                 <li><a href=connection.php><span class="material-symbols-outlined">login</span></a></li>
@@ -39,6 +39,48 @@ session_start();
                     </select>
                     <input class="submit" type="submit" value="Envoyer">
                     <i class="small">* Champs obligatoires avec 20 caractères minimum</i>
-                </form>
+
+
+            <?php  
+
+                //pour avoir la date
+                $mydate=getdate(date("U"));
+
+
+                    //valeur de la date pour le type sql datetime YYYY-MM-DD
+                    $sqldate="$mydate[year]/$mydate[mon]/$mydate[mday]";
+
+                    /*Chaque commentaire doit être composé d’un texte “posté le
+                            `jour/mois/année` par `utilisateur`”*/
+                            $name=$_SESSION['login'];
+                            $comment = $_POST['comment']; 
+                            $comment_with_date="<p>Posté le $sqldate par $name</p><br><p>$comment</p>";
+                            echo $comment_with_date;
+                            echo "<br>";
+
+                    // ----------- faire la requête d'insertion sql -----------
+                    
+                    // requête pour retrouver l'id utilisateur
+                    //SELECT utilisateurs.id from utilisateurs where login = $name
+                    $request=$mysqli->query("SELECT utilisateurs.id from utilisateurs where login = '$name'");
+                    $result=$request->fetch_all();
+                    //echo var_dump($result);
+                    $id_utilisateur=$result[0][0];
+                    $int_utilisateur=(int)$id_utilisateur;
+                    //echo $int_utilisateur;
+                    $newcomment = "INSERT INTO commentaires ( commentaire, id_utilisateur, date)
+                    VALUES( '$comment_with_date','$int_utilisateur', '$sqldate')";
+
+                    if (!empty($comment)){
+                        if ($mysqli->query($newcomment) === TRUE) {
+                            echo "Vous avez ajouté un commentaire avec succés";
+                            } else {
+                            echo "Erreur: " . $newcomment . "
+                            " . $mysqli->error;
+                            }
+                        }
+                ?> 
+            </form>
+            
         </section>
     </main>
