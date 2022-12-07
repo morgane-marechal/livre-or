@@ -17,7 +17,7 @@ session_start();
                 <?php if (isset($_SESSION['login'])){?>
                 <li><a href=livre-or.php>Le livre d'or</a></li>
                 <li><a href=commentaires.php><span class="material-symbols-outlined">add_comment</span></a></li>
-                <li><a href=profil.php><span class="material-symbols-outlined">manage_accounts</span></a></li>
+                <li><a href=profil.php><span class="material-symbols-outlined">settings</span></a></li>
                 <?php } ?>
                 <li><a href=inscription.php><span class="material-symbols-outlined">how_to_reg</span></a></li>
                 <li><a href=connection.php><span class="material-symbols-outlined">login</span></a></li>
@@ -32,13 +32,15 @@ session_start();
     </div>
     <main>
          <div id="bloc-form">
-            <h2>Voulez-vous faire des mofifications de vos données de profil ?</h2>
+            <h2>Paramètres du profil</h2>
             <section id="compte_form">
                 <form id="profil-form" action="" method="post" autocomplete="off">
                     <h3>Modification du compte</h3>
-                    <input type="text" name="newlogin" id="login" placeholder= "<?php echo $result[0][1]; ?>" minlength="3" autocomplete="off">
-                    <input type="text" name="newpassword" id="password" placeholder= "*****" minlength="5">
-                    <input type="text" name="newconf_password" id="conf_password" placeholder="*****" minlength="5">
+                    <input type="text" name="newlogin" id="login" placeholder= "<?php echo $_SESSION['login']; ?>" minlength="3" autocomplete="off">
+                    <?php if ($_POST['newlogin']) 
+                    {echo "<p>Vous avez bien changé votre login en".$_POST['newlogin']."</p>"; }?>
+                    <input type="text" name="newpassword" id="password" placeholder= "<?php echo $_SESSION['password']; ?>" minlength="5">
+                    <input type="text" name="newconf_password" id="conf_password" placeholder="<?php echo $_SESSION['password']; ?>" minlength="5">
                     <?php if(($_POST['newpassword']) && ($_POST['newconf_password']) && (($_POST['newpassword']) == ($_POST['newconf_password']))) 
                     {echo "<p>Vous avez bien changé votre mot de passe en ".$_POST['newpassword']."</p>"; }?>
                     </select>
@@ -51,11 +53,13 @@ session_start();
 
 
     <?php
+     $login=$_SESSION['login'];
      if ($_POST['newlogin']){
-        echo "Changement de login";
         $changelogin=$_POST['newlogin'];
-        $sqllogin = "update utilisateurs set login = '$changelogin' where login = '$newlogin'";
+        echo "Changement de login $login en $changelogin. Veuillez rafraichir la page";
+        $sqllogin = "update utilisateurs set login = '$changelogin' where login = '$login'";
         $rs = mysqli_query($mysqli,$sqllogin);
+        $_SESSION['login']=$changelogin;
     }elseif (($_POST['newpassword']) && ($_POST['newconf_password']) && (($_POST['newpassword']) == ($_POST['newconf_password'])) ){
         echo "Changement de MP";
         $newpassword=$_POST['newpassword'];
@@ -77,7 +81,7 @@ session_start();
                     $request=$mysqli->query("SELECT * FROM utilisateurs where login = '$newlogin'");
                     $result=$request->fetch_all();
                     
-                    echo "<br>".var_dump($result);
+                   // echo "<br> Ici c'est ".var_dump($result);
                     
                     //pour voir ce qu'il y a dans le tableau
                     echo "Login: ".$result[0][1]."<br>";
@@ -87,10 +91,19 @@ session_start();
 
                     //pour avoir version nom cripté du mot de passe
                     password_verify($password_post, $password_hash);
+                    
+                    
 
                     ?>
 
         
 
     </main>
+    <footer>
+                <ul>
+                    <li><a href="https://github.com/morgane-marechal/module-connexion" target="_blank" ><img class="logo" src="github-noir.png" alt="github"></a></li>
+                    <li><a href="connexion.php">Se connecter</a></li>
+                    <li><a href="inscription.php">S'inscrire</a></li>
+                </ul>
+    </footer>
 </body>

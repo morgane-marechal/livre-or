@@ -20,7 +20,7 @@ session_start();
                 <?php if (isset($_SESSION['login'])){?>
                 <li><a href=livre-or.php>Le livre d'or</a></li>
                 <li><a href=commentaires.php><span class="material-symbols-outlined">add_comment</span></a></li>
-                <li><a href=profil.php><span class="material-symbols-outlined">manage_accounts</span></a></li>
+                <li><a href=profil.php><span class="material-symbols-outlined">settings</span></a></li>
                 <?php } ?>
                 <li><a href=inscription.php><span class="material-symbols-outlined">how_to_reg</span></a></li>
                 <li><a href=connection.php><span class="material-symbols-outlined">login</span></a></li>
@@ -37,9 +37,9 @@ session_start();
     <main>
             <section id="connexion_form">
                 <form action="" method="post">
-                    <h3>Création de compte</h3>
+                    <h3>Connexion</h3>
                     <div id="login">  
-                    <input type="text" name="login" id="login" placeholder="Login*" required minlength="5"> 
+                    <input type="text" name="login" id="login" placeholder="Login*" required minlength="3"> 
                     </div>
                     <input type="password" name="password" id="password" placeholder="Password*" required minlength="5">
                     </select>
@@ -47,8 +47,9 @@ session_start();
                     <i class="small">* Champs obligatoires avec 5 caractères minimum</i>
                     <?php
                         $login = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['login'])); //protection pour éviter injection SQL malveillante
-                        $_SESSION['login'] = $login;
-                        $_SESSION['password'] = $password;
+                        //$_SESSION['login'] = $login;
+                        //$_SESSION['password'] = $password;
+
                         //------------------------code pour le formulaire de connexion --------------------------
                     
                         if(isset($_POST['login']) && isset($_POST['password'])){

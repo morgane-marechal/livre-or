@@ -14,10 +14,10 @@ session_start();
         <nav>
             <ul>
                 <li><a href=index.php>Home</a></li>
-                <?php if (isset($_SESSION['login'])){?>
+                <?php if (isset($_SESSION['login'])&& !empty($_SESSION['login'])){?>
                 <li><a href=livre-or.php>Le livre d'or</a></li>
                 <li><a href=commentaires.php><span class="material-symbols-outlined">add_comment</span></a></li>
-                <li><a href=profil.php><span class="material-symbols-outlined">manage_accounts</span></a></li>
+                <li><a href=profil.php><span class="material-symbols-outlined">settings</span></a></li>
                 <?php } ?>
                 <li><a href=inscription.php><span class="material-symbols-outlined">how_to_reg</span></a></li>
                 <li><a href=connection.php><span class="material-symbols-outlined">login</span></a></li>
@@ -35,4 +35,12 @@ session_start();
         
 
     </main>
+
+    <footer>
+                <ul>
+                    <li><a href="https://github.com/morgane-marechal/livre-or" target="_blank" ><img class="logo" src="github-noir.png" alt="github"></a></li>
+                    <li><a href="connexion.php">Se connecter</a></li>
+                    <li><a href="inscription.php">S'inscrire</a></li>
+                </ul>
+    </footer>
 </body>

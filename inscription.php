@@ -18,7 +18,7 @@ session_start();
                 <?php if (isset($_SESSION['login'])){?>
                 <li><a href=livre-or.php>Le livre d'or</a></li>
                 <li><a href=commentaires.php><span class="material-symbols-outlined">add_comment</span></a></li>
-                <li><a href=profil.php><span class="material-symbols-outlined">manage_accounts</span></a></li>
+                <li><a href=profil.php><span class="material-symbols-outlined">settings</span></a></li>
                 <?php } ?>
                 <li><a href=inscription.php><span class="material-symbols-outlined">how_to_reg</span></a></li>
                 <li><a href=connection.php><span class="material-symbols-outlined">login</span></a></li>
@@ -50,10 +50,7 @@ session_start();
      $login = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['login'])); //protection pour éviter injection SQL malveillante
      $password = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['password'])); 
      $checkpassword = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['conf_password'])); //protection pour éviter injection SQL malveillante
-    
-
-
-     
+         
 
      $check_login = "SELECT count(*) FROM utilisateurs where login = '$login'";
      $exec_requete = mysqli_query($mysqli,$check_login);
