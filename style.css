@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 /* ------- CSS du header ------*/
@@ -9,9 +10,11 @@ nav{
     flex-direction: row;
     height:7%;
     width: 100%;
-    background-color: rgb(92, 15, 73);
+    background-color: rgb(253, 135, 81);
     justify-content: space-around;
     align-items: center;
+    position:fixed ;
+    z-index:10;
 }
 
 ul{
@@ -34,30 +37,92 @@ a{
 
 }
 
+li p{
+    color:antiquewhite;
+}
+
 a:hover{
-    color:goldenrod;
+    color: rgb(25, 23, 44);
+
 }
 
 #sessionlog{
     background-color: rgb(25, 23, 44);
     color:white;
     font-weight: bold;
+    z-index:11;
 }
 
+/* ------- CSS du body ------*/
+
+
+
+
+body{
+    background-image: url("fond_montagne");
+    background-repeat: repeat;
+    background-size: cover;
+}
+
+main{
+    height:100%;
+    padding-top:4%;
+}
+
+main p{
+    color:white;
+    text-align:center;
+}
+#displayBook p{
+    color:rgb(25, 23, 44);
+    font-weight:bold;
+    font-size:1.1em;
+}
+#displayBook{
+    padding-bottom:80px;
+}
+
+form{
+    align-items:center;
+}
+
+form p{
+    color:rgb(29, 29, 58);
+    text-align:left;
+}
+
+#displayBook{
+    height:auto;
+}
+
+input{
+    border-radius: 5px;
+    background-color: rgb(25, 23, 44,0.7);
+    color:white;
+    height:30px;
+}
+
+input:hover{
+    background-color: rgb(25, 23, 44);
+  
+}
 /* -------- formulaire de connexion, inscription, changement d'info, livre d'or---------*/
 
-#connexion_form{
+#connexion_form, #compte_form{
     padding-top:5%;
     display:flex;
     flex-direction:column;
+    align-items: center;
 }
 form{
     background-color: azure;
     display: flex;
     flex-direction:column;
     width: 50%;
-    background-color: aquamarine;
     padding:2%;
+    background-color: rgba(255,255,255,0.5);
+    border-radius:10px ;
+    margin-bottom:30px;
 }
 
 form input{
@@ -73,7 +138,6 @@ form input{
 /* -------- page livre d'or---------*/
 
 #displayBook{
-    background-color: black;
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -84,7 +148,40 @@ form input{
     margin:10px;
     width:60%;
     text-align: center;
-    opacity:0.9;
+    opacity:0.8;
     border-radius: 5px;
     padding:2%5%2%5%;
+}
+
+h2{
+    text-align:center;
+    color: white;
+    font-weight:bold;
+    margin-top:30px;
+}
+/* -------- footer---------*/
+footer{
+    bottom: 0;
+    position:fixed ;
+    width:100%;
+}
+footer ul{
+    display:flex;
+    flex-direction: row;
+    height:80px;
+    width: 100%;
+    background-color: rgb(253, 135, 81);
+    justify-content: space-around;
+    align-items: center;
+    text-align:center;
+}
+
+.lien{
+    margin-top:60px;
+}
+
+
+
+.logo{
+    width:15%;
 }

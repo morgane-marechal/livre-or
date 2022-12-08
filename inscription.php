@@ -14,6 +14,7 @@ session_start();
     <header>
         <nav>
             <ul>
+                <li><?php if (isset($_SESSION['login'])){echo "<p>Bonjour ".$_SESSION['login']."! Vous êtes connecté !</p>";}?></li>
                 <li><a href=index.php>Home</a></li>
                 <?php if (isset($_SESSION['login'])){?>
                 <li><a href=livre-or.php>Le livre d'or</a></li>
@@ -36,9 +37,7 @@ session_start();
             <section id="connexion_form">
                 <form action="" method="post">
                     <h3>Création de compte</h3>
-                    <div id="login">  
                     <input type="text" name="login" id="login" placeholder="Login*" required minlength="5"> 
-                    </div>
                     <input type="password" name="password" id="password" placeholder="Password*" required minlength="5">
                     <input type="password" name="conf_password" id="conf_password" placeholder="Confirmation du mot de passe*" required minlength="2">
                     </select>
@@ -89,7 +88,12 @@ session_start();
 
     </form>
 </section>
-        
-
-    </main>
+</main>
+<footer>
+                <ul>
+                    <li><a href="https://github.com/morgane-marechal/livre-or" target="_blank" ><img class="logo" src="github-noir.png" alt="github"></a></li>
+                    <li class="lien"><a href="connection.php">Se connecter</a></li>
+                    <li class="lien"><a href="inscription.php">S'inscrire</a></li>
+                </ul>
+    </footer>
 </body>

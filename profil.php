@@ -13,6 +13,7 @@ session_start();
     <header>
         <nav>
             <ul>
+                <li><?php if (isset($_SESSION['login'])){echo "<p>Bonjour ".$_SESSION['login']."! Vous êtes connecté !</p>";}?></li>
                 <li><a href=index.php>Home</a></li>
                 <?php if (isset($_SESSION['login'])){?>
                 <li><a href=livre-or.php>Le livre d'or</a></li>
@@ -23,22 +24,17 @@ session_start();
                 <li><a href=connection.php><span class="material-symbols-outlined">login</span></a></li>
             </ul>
         </nav>
+
     </header>
-    <div id="sessionlog">
-        <?php if (isset($_SESSION['login'])){
-                        echo "<p>Bonjour ".$_SESSION['login'].". Vous êtes connecté</p>";
-                    }
-        ?>
-    </div>
+
     <main>
-         <div id="bloc-form">
             <h2>Paramètres du profil</h2>
             <section id="compte_form">
-                <form id="profil-form" action="" method="post" autocomplete="off">
+                <form action="" method="post" autocomplete="off">
                     <h3>Modification du compte</h3>
                     <input type="text" name="newlogin" id="login" placeholder= "<?php echo $_SESSION['login']; ?>" minlength="3" autocomplete="off">
                     <?php if ($_POST['newlogin']) 
-                    {echo "<p>Vous avez bien changé votre login en".$_POST['newlogin']."</p>"; }?>
+                    {echo "<p>Vous avez bien changé votre login en ".$_POST['newlogin']."</p>"; }?>
                     <input type="text" name="newpassword" id="password" placeholder= "<?php echo $_SESSION['password']; ?>" minlength="5">
                     <input type="text" name="newconf_password" id="conf_password" placeholder="<?php echo $_SESSION['password']; ?>" minlength="5">
                     <?php if(($_POST['newpassword']) && ($_POST['newconf_password']) && (($_POST['newpassword']) == ($_POST['newconf_password']))) 
@@ -48,15 +44,14 @@ session_start();
                     <i class="small">* Mofidier le champs que vous voulez changer, un seul champs à la fois.</i>
                 </form>
             </section>
-        </div>
-    </div>
+    
 
 
     <?php
      $login=$_SESSION['login'];
      if ($_POST['newlogin']){
         $changelogin=$_POST['newlogin'];
-        echo "Changement de login $login en $changelogin. Veuillez rafraichir la page";
+        echo "<p>Changement de login $login en $changelogin. Veuillez rafraichir la page</p>";
         $sqllogin = "update utilisateurs set login = '$changelogin' where login = '$login'";
         $rs = mysqli_query($mysqli,$sqllogin);
         $_SESSION['login']=$changelogin;
@@ -64,7 +59,7 @@ session_start();
         echo "Changement de MP";
         $newpassword=$_POST['newpassword'];
         $newsecurepassword = password_hash($newpassword, PASSWORD_DEFAULT);
-        $sqlpassword = "update utilisateurs set password = '$newsecurepassword' where login = '$newlogin'";
+        $sqlpassword = "update utilisateurs set password = '$newsecurepassword' where login = '$login'";
         $rs = mysqli_query($mysqli,$sqlpassword); 
     }
     ?> 
@@ -73,6 +68,7 @@ session_start();
                 <?php 
                     echo "<h2>Hello ".$_SESSION['login']." !</h2>";
                     echo "<br>";
+                    /*
                     //echo var_dump($_SESSION);
                     echo "<br>";
 
@@ -90,7 +86,7 @@ session_start();
                     echo"<br>";
 
                     //pour avoir version nom cripté du mot de passe
-                    password_verify($password_post, $password_hash);
+                    password_verify($password_post, $password_hash);*/
                     
                     
 
@@ -101,9 +97,9 @@ session_start();
     </main>
     <footer>
                 <ul>
-                    <li><a href="https://github.com/morgane-marechal/module-connexion" target="_blank" ><img class="logo" src="github-noir.png" alt="github"></a></li>
-                    <li><a href="connexion.php">Se connecter</a></li>
-                    <li><a href="inscription.php">S'inscrire</a></li>
+                    <li><a href="https://github.com/morgane-marechal/livre-or" target="_blank" ><img class="logo" src="github-noir.png" alt="github"></a></li>
+                    <li class="lien"><a href="connection.php">Se connecter</a></li>
+                    <li class="lien"><a href="inscription.php">S'inscrire</a></li>
                 </ul>
     </footer>
 </body>

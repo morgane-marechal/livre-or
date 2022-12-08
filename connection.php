@@ -16,8 +16,8 @@ session_start();
     <header>
         <nav>
             <ul>
-                <li><a href=index.php>Home</a></li>
-                <?php if (isset($_SESSION['login'])){?>
+                <li>        <?php if (isset($_SESSION['login'])){echo "<p>Bonjour ".$_SESSION['login']."! Vous êtes connecté !</p>";}?></li>
+                <li><a href=index.php>Home</a></li><?php if (isset($_SESSION['login'])){?>
                 <li><a href=livre-or.php>Le livre d'or</a></li>
                 <li><a href=commentaires.php><span class="material-symbols-outlined">add_comment</span></a></li>
                 <li><a href=profil.php><span class="material-symbols-outlined">settings</span></a></li>
@@ -28,19 +28,12 @@ session_start();
             </ul>
         </nav>
     </header>
-    <div id="sessionlog">
-        <?php if (isset($_SESSION['login'])){
-                        echo "<p>Bonjour ".$_SESSION['login'].". Vous êtes connecté</p>";
-                    }
-        ?>
-    </div>
+
     <main>
             <section id="connexion_form">
                 <form action="" method="post">
                     <h3>Connexion</h3>
-                    <div id="login">  
                     <input type="text" name="login" id="login" placeholder="Login*" required minlength="3"> 
-                    </div>
                     <input type="password" name="password" id="password" placeholder="Password*" required minlength="5">
                     </select>
                     <input class="submit" type="submit" value="Envoyer">
@@ -88,6 +81,15 @@ session_start();
                         ?>
                 </form>
             </section>
+    </main>
+            <footer>
+                <ul>
+                    <li><a href="https://github.com/morgane-marechal/livre-or" target="_blank" ><img class="logo" src="github-noir.png" alt="github"></a></li>
+                    <li class="lien"><a href="connection.php">Se connecter</a></li>
+                    <li class="lien"><a href="inscription.php">S'inscrire</a></li>
+                </ul>
+    </footer>
+</body>
     
     
         

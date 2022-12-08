@@ -13,6 +13,7 @@ session_start();
     <header>
         <nav>
             <ul>
+                <li><?php if (isset($_SESSION['login'])){echo "<p>Bonjour ".$_SESSION['login']."! Vous êtes connecté !</p>";}?></li>
                 <li><a href=index.php>Home</a></li>
                 <?php if (isset($_SESSION['login'])&& !empty($_SESSION['login'])){?>
                 <li><a href=livre-or.php>Le livre d'or</a></li>
@@ -39,8 +40,8 @@ session_start();
     <footer>
                 <ul>
                     <li><a href="https://github.com/morgane-marechal/livre-or" target="_blank" ><img class="logo" src="github-noir.png" alt="github"></a></li>
-                    <li><a href="connexion.php">Se connecter</a></li>
-                    <li><a href="inscription.php">S'inscrire</a></li>
+                    <li class="lien"><a href="connection.php">Se connecter</a></li>
+                    <li class="lien"><a href="inscription.php">S'inscrire</a></li>
                 </ul>
     </footer>
 </body>

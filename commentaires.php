@@ -13,6 +13,7 @@ session_start();
     <header>
         <nav>
             <ul>
+                <li><?php if (isset($_SESSION['login'])){echo "<p>Bonjour ".$_SESSION['login']."! Vous êtes connecté !</p>";}?></li>
                 <li><a href=index.php>Home</a></li>
                 <?php if (isset($_SESSION['login'])){?>
                 <li><a href=livre-or.php>Le livre d'or</a></li>
@@ -53,9 +54,9 @@ session_start();
                     /*Chaque commentaire doit être composé d’un texte “posté le
                             `jour/mois/année` par `utilisateur`”*/
                             $name=$_SESSION['login'];
-                            $comment = $_POST['comment']; 
-                            $comment_with_date="<p>Posté le $sqldate par $name</p><br><p>$comment</p>";
-                            echo $comment_with_date;
+                            $comment = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['comment']));
+                            $comment_with_date="<p>Posté le $mydate[mday] $mydate[month] $mydate[year] par $name</p><br><p>$comment</p>";
+                            //  echo $comment_with_date;
                             echo "<br>";
 
                     // ----------- faire la requête d'insertion sql -----------
@@ -84,3 +85,11 @@ session_start();
             
         </section>
     </main>
+    <footer>
+                <ul>
+                    <li><a href="https://github.com/morgane-marechal/livre-or" target="_blank" ><img class="logo" src="github-noir.png" alt="github"></a></li>
+                    <li class="lien"><a href="connection.php">Se connecter</a></li>
+                    <li class="lien"><a href="inscription.php">S'inscrire</a></li>
+                </ul>
+    </footer>
+</body>
