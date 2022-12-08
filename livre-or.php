@@ -39,7 +39,7 @@ session_start();
                 if(!$mysqli){
                 die('Erreur : ' .mysqli_connect_error());
                     }
-                $request=$mysqli->query("SELECT commentaire FROM commentaires ORDER BY date Desc");
+                $request=$mysqli->query("SELECT commentaire FROM commentaires ORDER BY id Desc");
                 $result_fetch_all = $request->fetch_all();
                 //var_dump($result_fetch_all);
 
